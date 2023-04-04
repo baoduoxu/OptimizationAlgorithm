@@ -1,2 +1,2 @@
 # OptimizationAlgorithm
-Some optimization algorithm.
+Some optimization algorithms.
