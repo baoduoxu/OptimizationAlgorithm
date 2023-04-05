@@ -1,2 +1,2 @@
 # OptimizationAlgorithm
-Some optimization algorithms.
+Python codes of some optimization algorithms.
