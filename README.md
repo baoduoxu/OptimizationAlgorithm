@@ -1,7 +1,7 @@
 # OptimizationAlgorithm
 本仓库对常见的最优化算法用 Python 进行了实现, 同时会对机器学习的一些算法转化成的优化模型采用一些实际问题的数据进行试验.
 
-如要测试, 请在 `unconstrained_optimization/encapsulation/test_function.py` 文件中定义函数以及初值点. 推荐采用典型的二次型函数, Rosenbrok 函数 $f(x,y)=100(x-y^2)^2+(1-y)^2 ,$ 以及函数 $f(x,y)=\frac{x^2}{5}+\frac{y^2}{10}+\sin(x+y)$ 进行测试. 可视化的例子在 `unconstrained_optimization/first_order_method/example` 中.
+如要测试, 请在 `unconstrained_optimization/encapsulation/test_function.py` 文件中定义函数以及初值点. 推荐采用典型的二次型函数, Rosenbrock 函数 $f(x,y)=100(x-y^2)^2+(1-y)^2 ,$ 以及函数 $f(x,y)=\frac{x^2}{5}+\frac{y^2}{10}+\sin(x+y)$ 进行测试. 可视化的例子在 `unconstrained_optimization/first_order_method/example` 中.
 
 目前已经实现的算法已在下文加粗.
 
