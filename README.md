@@ -49,7 +49,6 @@
 $$
 \begin{aligned}
 &\min_{w\in\mathbb{R}^n} f(w)=\frac{1}{2}\sum_{i=1}^N(w^Tx_i-y_i)^2\\
-
 \end{aligned}
 $$
 
