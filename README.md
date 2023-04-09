@@ -55,12 +55,13 @@ $$
 2: 多元线性回归的正则化:
 
 3: 支持向量机
+
 $$
 \begin{aligned}
 &\min \|w\|^2\\
 \text{s.t.}&y^{(i)}(w^Tx^{(i)}+b)\ge 1,i=1,\cdots,m\\
-&w\in\R^n\\
-&b\in\R
+&w\in\mathbb{R}^n\\
+&b\in\mathbb{R}
 \end{aligned}
 $$
 
