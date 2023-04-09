@@ -45,6 +45,7 @@
 给定样本 $\{(x_i,y_i)\}_{i=1}^N,x_i\in\mathbb{R}^n,$ 有下面的约束问题:
 
 1: 多元线性回归
+
 $$
 \begin{aligned}
 &\min_{w\in\mathbb{R}^n} f(w)=\frac{1}{2}\sum_{i=1}^N(w^Tx_i-y_i)^2\\
