@@ -1,43 +1,41 @@
-import newton_high_dim
-import sympy
+import sys,os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from encapsulation.Golden_cut import golden_cut
+from encapsulation.Plot import plot
+from encapsulation.Stop_condition import stop_condition
+from encapsulation.test_function import f,x_0
 
-def newton(f, x0, var, eps):
-    con = 1
-    k = 0
-    HF = sympy.hessian(f, var)  # 黑塞矩阵
-    grad_f = f.jacobian(var).T
-    while con > eps and k<1:
-        rel1 = newton_high_dim.change(var, x0)
-        g = grad_f.subs(rel1)
-        F = HF.subs(rel1)
-        print(F)
-        E=sympy.Matrix.eigenvals(F)
-        _min=0
-        for x in E:
-            if _min<x:
-                _min=x
-        if _min<0:
-            mu=-_min+1
-        # if sympy.Matrix.det(F)!=0:
-            
-        #     x1 = x0-sympy.Matrix.inv(F)*g
-        # else:
-        #     #执行最速下降法
-        # tmp = x1
-        # x1 = x0
-        # x0 = tmp
-        # con = sympy.Matrix.norm(x1-x0)/max(sympy.Matrix.norm(x0), 1)
+import numpy as np
+from autograd import grad,hessian
+
+def newton(f, x_0,eps=1e-3):
+    k = 0  # 迭代次数
+    condition = 1  # 结束迭代的条件
+    x_list = [x_0]
+    y_list = [f(x_0)]
+    x = x_0
+    n=len(x)
+    while condition > eps:
+        hessian_f = hessian(f)(x)  # 黑塞矩阵
+        grad_f = grad(f)(x)
+        # 求特征值, 如果存在负特征值则给所有的特征值都加上一个mu
+        sigma=np.linalg.eigvals(hessian_f)
+        m=np.min(sigma)
+        mu=0
+        if m<0: mu=(-m)+1
+        hessian_f+=(mu*np.identity(n))
+        direction=np.linalg.inv(hessian_f)@grad_f
+        def phi(step): return f(x-step*direction)
+        step_best = golden_cut(phi, 0, 100, 1e-5)
+        delta=step_best*direction
+        condition=stop_condition(delta,x)
+        x = x-delta
+        x_list.append(x)
+        y_list.append(f(x))
         k += 1
-    print(x0.evalf(6))
-    rel3 = newton_high_dim.change(var, x0)
-    min_f = f.subs(rel3)
-    print(min_f[0, 0].evalf(6))
     print("Total iterations:", k)
+    return x_list,y_list
 
-x, y, z, w = sympy.symbols('x,y,z,w')
-# w=(x-5)**2+(y+4)**2+4*(z-6)**2
-w = 100*(x-y**2)**2+(1-y)**2
-var = sympy.Matrix([x, y])
-f = sympy.Matrix([w])
-x0 = sympy.Matrix([0, 0])
-newton(f, x0, var, 1e-6)
+x_list, y_list = newton(f, x_0, 1e-3)
+print(x_list,y_list)
+plot(x_list, y_list, 2)
