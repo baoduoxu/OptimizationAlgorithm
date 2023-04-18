@@ -2,8 +2,8 @@ from encapsulation.test_function import f
 import matplotlib.pyplot as plt
 import numpy as np
 def plot(x_list, y_list, graph_type=2):
-    x = np.linspace(-12, 12, 1000)  # 绘图区间
-    y = np.linspace(-10, 10, 1000)
+    x = np.linspace(-8, 8, 1000)  # 绘图区间
+    y = np.linspace(-8, 8, 1000)
     X, Y = np.meshgrid(x, y)  # 构造网格
     Z = f([X, Y])
     if graph_type == 2:  # 二维图
