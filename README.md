@@ -1,4 +1,3 @@
-# OptimizationAlgorithm
 本仓库对常见的最优化算法用 Python 进行了实现, 同时会对机器学习的一些算法转化成的优化模型采用一些实际问题的数据进行试验.
 
 如要测试, 请在 `unconstrained_optimization/encapsulation/test_function.py` 文件中定义函数以及初值点. 推荐采用典型的二次型函数, Rosenbrock 函数 $f(x,y)=100(x-y^2)^2+(1-y)^2 ,$ 以及函数 $f(x,y)=\frac{x^2}{5}+\frac{y^2}{10}+\sin(x+y)$ 进行测试. 可视化的例子在 `unconstrained_optimization/first_order_method/example` 中.
@@ -45,22 +44,23 @@
 给定样本 $\{(x_i,y_i)\}_{i=1}^N,x_i\in\mathbb{R}^n,$ 有下面的约束问题:
 
 1: 多元线性回归
+
 $$
 \begin{aligned}
 &\min_{w\in\mathbb{R}^n} f(w)=\frac{1}{2}\sum_{i=1}^N(w^Tx_i-y_i)^2\\
-
 \end{aligned}
 $$
 
 2: 多元线性回归的正则化:
 
 3: 支持向量机
+
 $$
 \begin{aligned}
 &\min \|w\|^2\\
 \text{s.t.}&y^{(i)}(w^Tx^{(i)}+b)\ge 1,i=1,\cdots,m\\
-&w\in\R^n\\
-&b\in\R
+&w\in\mathbb{R}^n\\
+&b\in\mathbb{R}
 \end{aligned}
 $$
 
