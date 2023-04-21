@@ -2,6 +2,10 @@ __pycache__/
 
 history_version/
 
-# second_order_method/test_version/
+second_order_method/test_version/
 
 simplex_plot.py
+
+Plot_one_demension.py
+
+test_version/
