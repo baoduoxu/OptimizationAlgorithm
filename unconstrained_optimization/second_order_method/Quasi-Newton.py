@@ -63,7 +63,7 @@ def quasi_newton(f,x_0,eps):
         y_list.append(f(x))
         grad_last=grad_f
         grad_f=grad(f)(x)
-        H=approx_of_hessian(H,grad_last,grad_f,x_last,x,'rank1')
+        H=approx_of_hessian(H,grad_last,grad_f,x_last,x,'DFP' )
         k+=1
     print("Total iterations:", k)
     return x_list,y_list

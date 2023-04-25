@@ -1,5 +1,7 @@
+# 用来在Gomory.py中调用
+
+
 import numpy as np
-# np.set_printoptions(precision=3)
 np.set_printoptions(precision=3, suppress=True, linewidth=np.inf)
 
 max_iter=100
@@ -117,15 +119,10 @@ def update_checking_num(table, isv):
 def simplex(A, b, c, isv=0):  # 标准化的线性规划问题, 参数为c, A, b
     m, n = np.shape(A)
     if type(isv) != int:
-        print('下面是对人工问题的求解:')
         table = construct_simplex_table(A, b, c, isv, m, n)
-        print('初始单纯形表为:')
-        print(table)
     else:
         table, isv = initial_base(A, b, c, m, n)  # 人工问题初始化基变量下标
-        print('下面是通过人工问题找到基本解后对原问题的解,此时的单纯形表为:')
         table = update_checking_num(table, isv)
-        print(table)
     k=0
     while True:
         if k>max_iter:
@@ -134,16 +131,10 @@ def simplex(A, b, c, isv=0):  # 标准化的线性规划问题, 参数为c, A, b
         k+=1
         p, q, r = find_master(table, m, n)  # 在非基变量中寻找主元,q为进基列,r为出基列
         if q == -1:
-            print('此时检验数均非负,找到最优解.')
             return -table[m][n], isv, get_solution(table, isv), table
         if p == -1:
             print('Oops! There\'s no optimal solution for this LP.')
             return -1
         isv[q] = 1
         isv[r] = 0
-        print(f'第{k}轮迭代, 主元的坐标为({p},{q}),出基列为{r},进基列为{q},换基操作后的单纯形表为:')
         table = elementary_transform(table, p, q)  # 进行初等变换, 即相当于换基操作
-        print(table)
-        table[m,:][np.signbit(table[m,:])]=0
-        table[m,:][np.where(table[m,:] == -0)] = 0
-        print(table)

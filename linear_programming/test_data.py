@@ -5,11 +5,11 @@ print('请确保输入标准形式的线性规划, 依次输入系数矩阵的�
 m,n=map(int,input().split())
 A=[]
 for i in range(m):
-    row=list(map(int,input().split()))
+    row=list(map(float,input().split()))
     A.append(row)
 A=np.array(A)
-b=list(map(int,input().split()))
-c=list(map(int,input().split()))
+b=list(map(float,input().split()))
+c=list(map(float,input().split()))
 opt_val,base,opt_sol,simplex_table=simplex(A, b, c)
 print(f'最优解为{np.round(opt_sol,3)},最优值为{np.round(opt_val,3)}')
 print('最终的单纯形表为:')
@@ -57,3 +57,10 @@ print(simplex_table)
 # A=[[2,-1,1,0,0],[2,1,0,-1,0],[1,2,0,0,1]]
 # b=[8,2,10]
 # c=[1,-3,1,0,0]
+
+# 3 7
+# 0.5 -5.5 -2.5 9 1 0 0
+# 0.5 -1.5 -0.5 1 0 1 0
+# 1 0 0 0 0 0 1
+# 0 0 1
+# -10 57 9 24 0 0 0
